@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Read Commit message from COMMIT_EDITMSG file and split on first word.
+COMMIT_MSG_FILE=`head -n1 $1 | cut -f1 -d" "`
+echo `head -n1 $1`
+
+COMMIT_MSG_CHECK="Merge"
+
+if [ "$COMMIT_MSG_FILE" == "$COMMIT_MSG_CHECK" ]
+then
+	# Display a confirmation message.
+	read -p "You are about to commit. Are you sure? [y|n] " COMMITTING < /dev/tty
+	# Check if the confirmation is accepted to continue committing or refused.
+	if echo $COMMITTING | grep -E '^[Yy]$' > /dev/null
+	then
+		exit 0
+	fi
+	exit 1
+fi
