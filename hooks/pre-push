@@ -1,0 +1,5 @@
+echo "Running model and regression specs before pushing to repository."
+if (exec rspec ./spec/models/); 
+	then
+		exec rspec spec -t regression
+fi
